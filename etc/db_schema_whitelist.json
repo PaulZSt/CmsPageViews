@@ -1,0 +1,16 @@
+{
+    "custom_cms_page_counter": {
+        "column": {
+            "id": true,
+            "cms_page_id": true,
+            "backend_counter ": true,
+            "frontend_counter ": true
+        },
+        "index": {
+            "CUSTOM_CMS_PAGE_COUNTER_CMS_PAGE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

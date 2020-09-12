@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Petrovski_CmsPageViews::greetings" title="Custom Modules" translate="title" module="Petrovski_CmsPageViews" parent="Magento_Backend::content" sortOrder="50" dependsOnModule="Petrovski_CmsPageViews" resource="Petrovski_CmsPageViews::greetings"/>
+        <add id="Petrovski_CmsPageViews::greetings_counter" title="CMS Page Views" translate="title" module="Petrovski_CmsPageViews" parent="Petrovski_CmsPageViews::greetings" sortOrder="10" dependsOnModule="Petrovski_CmsPageViews" action="cmspageviews/counter" resource="Petrovski_CmsPageViews::greetings"/>
+    </menu>
+</config>
