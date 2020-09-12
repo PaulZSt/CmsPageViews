@@ -9,7 +9,9 @@ use Petrovski\CmsPageViews\Service\ViewsCountUpdate;
 
 class Frontend
 {
-    private $type = 1; //frontend
+    /** Plugin Type frontend */
+    const TYPE = 'frontend';
+
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
@@ -53,7 +55,7 @@ class Frontend
         $cmsPage = $this->_objectManager->get('\Magento\Cms\Model\Page');
         $pageId = $cmsPage->getId();
         try {
-            $this->viewsCountUpdate->execute($pageId, $this->type);
+            $this->viewsCountUpdate->execute($pageId, self::TYPE);
         } catch (LocalizedException $exception) {
             $this->logger->critical($exception);
         }

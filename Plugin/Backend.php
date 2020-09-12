@@ -12,10 +12,8 @@ use Petrovski\CmsPageViews\Service\ViewsCountUpdate;
  */
 class Backend
 {
-    /**
-     * @var int
-     */
-    private $type = 0; //backend
+    /** Plugin Type backend */
+    const TYPE = 'backend';
 
     /**
      * @var \Magento\Framework\ObjectManagerInterface
@@ -61,7 +59,7 @@ class Backend
 
         $pageId = $id = $this->_request->getParam('page_id');
         try {
-           $this->viewsCountUpdate->execute($pageId, $this->type);
+           $this->viewsCountUpdate->execute($pageId, self::TYPE);
         } catch (LocalizedException $exception) {
             $this->logger->critical($exception);
         }

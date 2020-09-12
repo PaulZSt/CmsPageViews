@@ -48,37 +48,38 @@ class ViewsCountUpdate
      * @throws LocalizedException
      * @throws AlreadyExistsException
      */
-    public function execute(int $pageId, $type) {
-        $homePageIdentifier = $this->_scopeConfig->getValue(
+    public function execute(int $pageId, $type)
+    {
+        $serviceStatus = $this->_scopeConfig->getValue(
             'web/cms_page_views_counters/cms_count_views',
             ScopeInterface::SCOPE_STORE
         );
 
-        $views = $this->getViews($pageId);
-        $viewRecordId = $views->getData('id');
-        $frontendViews = $views->getData('frontend_counter');
-        $backendViews = $views->getData('backend_counter');
+        if ($serviceStatus) {
+            $views = $this->getViews($pageId);
+            $viewRecordId = $views->getData('id');
+            $frontendViews = $views->getData('frontend_counter');
+            $backendViews = $views->getData('backend_counter');
 
-        if($type==1) {
-            $frontendViews = $views->getData('frontend_counter') + 1;
-        } else {
-            $backendViews = $views->getData('backend_counter') + 1;
-        }
+            if ($type === 'frontend') {
+                $frontendViews = $views->getData('frontend_counter') + 1;
+            } elseif ($type === 'backend') {
+                $backendViews = $views->getData('backend_counter') + 1;
+            }
 
-        if(!$viewRecordId) {
-            $data = [
-                'cms_page_id' => $pageId,
-                'backend_counter' => 1,
-                'frontend_counter' => 1
-            ];
-            $views->setData($data);
-            $views->save();
-        } else {
-            $data = [
-                'id' => $viewRecordId,
-                'frontend_counter' => $frontendViews,
-                'backend_counter' => $backendViews
-            ];
+            if (!$viewRecordId) {
+                $data = [
+                    'cms_page_id' => $pageId,
+                    'backend_counter' => $backendViews,
+                    'frontend_counter' => $frontendViews
+                ];
+            } else {
+                $data = [
+                    'id' => $viewRecordId,
+                    'backend_counter' => $backendViews,
+                    'frontend_counter' => $frontendViews
+                ];
+            }
             $views->setData($data);
             $views->save();
         }
